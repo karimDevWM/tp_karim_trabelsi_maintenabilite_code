@@ -50,6 +50,13 @@ public class EqualizerFragment extends BaseFragment implements
 
     private static final String EFFECT_TYPE_VIRTUALIZER = "37cc2c00-dddd-11db-8577-0002a5d5c51b";
 
+    private static final String AUDIOFX_EQ_PRESET = "audiofx.eq.preset";
+
+    private static final String = "audiofx.eq.bandlevels";
+
+    private static final String = "audiofx.eq.bandlevels.custom";
+
+
     SharedPreferences prefs;
 
     /**
@@ -402,7 +409,7 @@ public class EqualizerFragment extends BaseFragment implements
      */
     void equalizerSetPreset(final int preset) {
         eqPreset = preset;
-        prefs.edit().putString("audiofx.eq.preset", String.valueOf(preset)).apply();
+        prefs.edit().putString(AUDIOFX_EQ_PRESET, String.valueOf(preset)).apply();
 
         String newLevels;
         if (preset == eqCustomPresetPosition) {
@@ -434,7 +441,7 @@ public class EqualizerFragment extends BaseFragment implements
         // Initialize the Equalizer elements.
         if (equalizerSupported) {
             String preset = String.valueOf(numberEqualizerBands);
-            eqPreset = Integer.valueOf(prefs.getString("audiofx.eq.preset", preset));
+            eqPreset = Integer.valueOf(prefs.getString(AUDIOFX_EQ_PRESET, preset));
             if (spinnerAdapter != null && spinnerAdapter.getCount() > eqPreset) {
                 spinner.setSelection(eqPreset);
             }
@@ -505,7 +512,7 @@ public class EqualizerFragment extends BaseFragment implements
         // remove trailing ";"
         bandLevels.deleteCharAt(bandLevels.length() - 1);
         prefs.edit().putString("audiofx.eq.bandlevels.custom", bandLevels.toString()).apply();
-        prefs.edit().putString("audiofx.eq.preset", String.valueOf(eqCustomPresetPosition)).apply();
+        prefs.edit().putString(AUDIOFX_EQ_PRESET, String.valueOf(eqCustomPresetPosition)).apply();
     }
 
     private String format(String format, Object... args) {

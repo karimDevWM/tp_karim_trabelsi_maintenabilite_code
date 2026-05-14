@@ -47,7 +47,12 @@ public final class ShuttleUtils {
 
     //Arguments supplied to various bundles
 
-    private final static String TAG = "ShuttleUtils";
+    private static final String TAG = "ShuttleUtils";
+
+    // Private constructor to prevent instantiation
+    private ShuttleUtils() {
+        throw new AssertionError("No instances.");
+    }
 
     @NonNull
     public static Intent getShuttleStoreIntent(@NonNull String packageName) {
@@ -128,6 +133,7 @@ public final class ShuttleUtils {
         try {
             return application.getPackageName().equals(Config.PACKAGE_NAME_PRO);
         } catch (Exception ignored) {
+            //the exception is ignored
         }
 
         //If something goes wrong, assume the user has the pro version

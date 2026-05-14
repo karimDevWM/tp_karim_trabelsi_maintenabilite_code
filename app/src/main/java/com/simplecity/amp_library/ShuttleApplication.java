@@ -39,7 +39,6 @@ import com.simplecity.amp_library.utils.StringUtils;
 import com.simplecity.amp_library.utils.extensions.GenreExtKt;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-import com.uber.rxdogtag.RxDogTag;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import io.fabric.sdk.android.Fabric;
@@ -74,7 +73,7 @@ public class ShuttleApplication extends DaggerApplication {
 
     private RefWatcher refWatcher;
 
-    public HashMap<String, UserSelectedArtwork> userSelectedArtwork = new HashMap<>();
+    private HashMap<String, UserSelectedArtwork> userSelectedArtwork = new HashMap<>();
 
     private static Logger jaudioTaggerLogger1 = Logger.getLogger("org.jaudiotagger.audio");
     private static Logger jaudioTaggerLogger2 = Logger.getLogger("org.jaudiotagger");
@@ -100,13 +99,6 @@ public class ShuttleApplication extends DaggerApplication {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return;
-        }
-
-        // Todo: Remove for production builds. Useful for tracking down crashes in beta.
-        RxDogTag.install();
-
-        if (BuildConfig.DEBUG) {
-            // enableStrictMode();
         }
 
         refWatcher = LeakCanary.install(this);
@@ -218,7 +210,7 @@ public class ShuttleApplication extends DaggerApplication {
         try {
             return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException | NullPointerException ignored) {
-
+            // the exception is ignored
         }
         return "unknown";
     }
@@ -296,6 +288,7 @@ public class ShuttleApplication extends DaggerApplication {
             try {
                 getContentResolver().delete(PlayCountTable.URI, selection.toString(), null);
             } catch (IllegalArgumentException ignored) {
+                // the exception is ignored
             }
         });
     }
@@ -371,22 +364,13 @@ public class ShuttleApplication extends DaggerApplication {
                         }
 
                 ).toList()
-                .doOnSuccess(contentProviderOperations -> {
-                    getContentResolver().applyBatch(MediaStore.AUTHORITY, new ArrayList<>(contentProviderOperations));
-                })
+                .doOnSuccess(contentProviderOperations ->
+                    getContentResolver()
+                        .applyBatch(MediaStore.AUTHORITY, 
+                            new ArrayList<>(contentProviderOperations
+                            )
+                        );
+                )
                 .flatMapCompletable(songs -> Completable.complete());
-    }
-
-    private void enableStrictMode() {
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build());
-
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .penaltyFlashScreen()
-                .build());
     }
 }

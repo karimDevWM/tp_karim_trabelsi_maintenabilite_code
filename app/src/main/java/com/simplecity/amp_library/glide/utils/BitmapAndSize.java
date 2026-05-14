@@ -4,13 +4,30 @@ import android.graphics.Bitmap;
 
 public class BitmapAndSize {
 
-    public Bitmap bitmap;
-    public Size size;
+    private Bitmap bitmap;
+    private Size size;
 
     public BitmapAndSize(Bitmap bitmap, Size size) {
         this.bitmap = bitmap;
         this.size = size;
     }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -400,12 +400,10 @@ public class CustomCollapsingToolbarLayout extends FrameLayout {
             final int insetTop = mLastInsets.getSystemWindowInsetTop();
             for (int i = 0, z = getChildCount(); i < z; i++) {
                 final View child = getChildAt(i);
-                if (!ViewCompat.getFitsSystemWindows(child)) {
-                    if (child.getTop() < insetTop) {
-                        // If the child isn't set to fit system windows but is drawing within
-                        // the inset offset it down
-                        ViewCompat.offsetTopAndBottom(child, insetTop);
-                    }
+                if (!ViewCompat.getFitsSystemWindows(child) && child.getTop() < insetTop) {
+                    // If the child isn't set to fit system windows but is drawing within
+                    // the inset offset it down
+                    ViewCompat.offsetTopAndBottom(child, insetTop);
                 }
             }
         }
@@ -1243,6 +1241,8 @@ public class CustomCollapsingToolbarLayout extends FrameLayout {
                     case LayoutParams.COLLAPSE_MODE_PARALLAX:
                         offsetHelper.setTopAndBottomOffset(
                                 Math.round(-verticalOffset * lp.mParallaxMult));
+                        break;
+                    default:
                         break;
                 }
             }
