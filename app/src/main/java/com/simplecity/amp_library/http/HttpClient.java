@@ -14,7 +14,7 @@ public class HttpClient {
 
     private static HttpClient sInstance;
 
-    public OkHttpClient okHttpClient;
+    public static finaOkHttpClient okHttpClient;
 
     public LastFmService lastFmService;
 
