@@ -10,15 +10,26 @@ public class HttpClient {
     public static final String TAG = "HttpClient";
 
     private static final String URL_LAST_FM = "https://ws.audioscrobbler.com/2.0/";
-    private static final String URL_ITUNES = "https://itunes.apple.com/search/";
-
+    private final OkHttpClient okHttpClient;
     private static HttpClient sInstance;
 
-    public static finaOkHttpClient okHttpClient;
-
-    public LastFmService lastFmService;
+    public static final LastFmService lastFmService;
 
     public static final String TAG_ARTWORK = "artwork";
+
+    static {
+        okHttpClient = new OkHttpClient.Builder().build();
+        Retrofit lastFmRestAdapter = new Retrofit.Builder()
+            .baseUrl(URL_LAST_FM)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+            lastFmService = lastFmRestAdapter.create(LastFmService.class);
+    }
+
+    public LastFmService getLastFmService() {
+        return lastFmService;
+    }
 
     public static synchronized HttpClient getInstance() {
         if (sInstance == null) {

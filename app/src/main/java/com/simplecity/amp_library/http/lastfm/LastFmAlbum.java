@@ -11,10 +11,28 @@ public class LastFmAlbum implements LastFmResult {
     public Album album;
 
     public static class Album {
-        public String name;
+        private String name;
         @SerializedName("image")
         public List<LastFmImage> images = new ArrayList<>();
-        public Wiki wiki;
+        private Wiki wiki;
+
+        public String getName() {
+            return name;
+        }
+
+        public String setName(String name) {
+            this.name = name;
+            return this.name;
+        }
+
+        public Wiki getWiki() {
+            return wiki;
+        }
+
+        public Wiki setWiki(Wiki wiki) {
+            this.wiki = wiki;
+            return this.wiki;
+        }
     }
 
     @Override
@@ -27,6 +45,15 @@ public class LastFmAlbum implements LastFmResult {
     }
 
     public static class Wiki {
-        public String summary;
+        private String summary;
+
+        public String getSummary() {
+            return summary;
+        }
+
+        public String setWiki(String summary) {
+            this.summary = summary;
+            return this.summary;
+        }
     }
 }

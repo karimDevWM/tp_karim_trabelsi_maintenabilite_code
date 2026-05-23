@@ -275,7 +275,7 @@ public class ShuttleApplication extends DaggerApplication {
                     .build();
 
             SqlUtils.createActionableQuery(this, cursor ->
-                    songIds.add(cursor.getInt(cursor.getColumnIndex(PlayCountTable.COLUMN_ID))), query);
+                    songIds.add(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID))), query);
 
             StringBuilder selection = new StringBuilder(PlayCountTable.COLUMN_ID + " IN (");
 
@@ -365,11 +365,9 @@ public class ShuttleApplication extends DaggerApplication {
 
                 ).toList()
                 .doOnSuccess(contentProviderOperations ->
-                    getContentResolver()
-                        .applyBatch(MediaStore.AUTHORITY, 
-                            new ArrayList<>(contentProviderOperations
-                            )
-                        );
+                    {
+                        getContentResolver().applyBatch(MediaStore.AUTHORITY, new ArrayList<>(contentProviderOperations));
+                    }
                 )
                 .flatMapCompletable(songs -> Completable.complete());
     }

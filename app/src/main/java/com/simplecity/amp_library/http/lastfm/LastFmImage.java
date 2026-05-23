@@ -8,5 +8,14 @@ public class LastFmImage {
     @SerializedName("#text")
     public String url;
 
-    public String size;
+    private String size;
+
+    public String getSize() {
+        return this.size;
+    }
+
+    public String setSize(String size) {
+        this.size = size;
+        return this.size;
+    }
 }
