@@ -151,22 +151,22 @@ public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> imple
     public void bindView(ViewHolder holder) {
         super.bindView(holder);
 
-        holder.lineOne.setText(song.name);
+        holder.lineOne.setText(song.getName());
 
         if (holder.playCount != null) {
-            if (showPlayCount && song.playCount > 1) {
+            if (showPlayCount && song.getPlayCount() > 1) {
                 holder.playCount.setVisibility(View.VISIBLE);
-                holder.playCount.setCount(song.playCount);
+                holder.playCount.setCount(song.getPlayCount());
             } else {
                 holder.playCount.setVisibility(View.GONE);
             }
         }
 
         if (showArtistName && showAlbumName) {
-            holder.lineTwo.setText(String.format("%s - %s", song.artistName, song.albumName));
+            holder.lineTwo.setText(String.format("%s - %s", song.getArtistName(), song.getAlbumName()));
             holder.lineTwo.setVisibility(View.VISIBLE);
         } else if (showAlbumName) {
-            holder.lineTwo.setText(song.albumName);
+            holder.lineTwo.setText(song.getAlbumName());
             holder.lineTwo.setVisibility(View.VISIBLE);
         } else {
             holder.lineTwo.setVisibility(View.GONE);
@@ -179,14 +179,14 @@ public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> imple
                 holder.artwork.setVisibility(View.VISIBLE);
                 requestManager.load(song)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(PlaceholderProvider.getInstance(holder.itemView.getContext()).getPlaceHolderDrawable(song.albumName, false, settingsManager))
+                        .placeholder(PlaceholderProvider.getInstance(holder.itemView.getContext()).getPlaceHolderDrawable(song.getAlbumName(), false, settingsManager))
                         .into(holder.artwork);
             } else {
                 holder.artwork.setVisibility(View.GONE);
             }
         }
 
-        holder.overflowButton.setContentDescription(holder.itemView.getResources().getString(R.string.btn_options, song.name));
+        holder.overflowButton.setContentDescription(holder.itemView.getResources().getString(R.string.btn_options, song.getName()));
 
         if (prefixHighlighter != null) {
             prefixHighlighter.setText(holder.lineOne, prefix);
@@ -196,7 +196,7 @@ public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> imple
         if (holder.trackNumber != null) {
             if (showTrackNumber) {
                 holder.trackNumber.setVisibility(View.VISIBLE);
-                holder.trackNumber.setText(String.valueOf(song.track));
+                holder.trackNumber.setText(String.valueOf(song.getTrack()));
             } else {
                 holder.trackNumber.setVisibility(View.GONE);
             }
@@ -232,13 +232,13 @@ public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> imple
             boolean requiresSubstring = true;
             switch (sortOrder) {
                 case SortManager.SongSort.DEFAULT:
-                    string = StringUtils.keyFor(song.name);
+                    string = StringUtils.keyFor(song.getName());
                     break;
                 case SortManager.SongSort.NAME:
-                    string = song.name;
+                    string = song.getName();
                     break;
                 case SortManager.SongSort.YEAR:
-                    string = String.valueOf(song.year);
+                    string = String.valueOf(song.getYear());
                     if (string.length() != 4) {
                         string = "-";
                     } else {
@@ -247,10 +247,10 @@ public class SongView extends BaseSelectableViewModel<SongView.ViewHolder> imple
                     requiresSubstring = false;
                     break;
                 case SortManager.SongSort.ALBUM_NAME:
-                    string = StringUtils.keyFor(song.albumName);
+                    string = StringUtils.keyFor(song.getAlbumName());
                     break;
                 case SortManager.SongSort.ARTIST_NAME:
-                    string = StringUtils.keyFor(song.artistName);
+                    string = StringUtils.keyFor(song.getArtistName());
                     break;
             }
 

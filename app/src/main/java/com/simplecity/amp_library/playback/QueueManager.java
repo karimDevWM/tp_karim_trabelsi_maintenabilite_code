@@ -516,7 +516,7 @@ public class QueueManager {
         Map<Integer, Song> map = new TreeMap<>();
 
         Stream.of(queueItems).map(QueueItem::getSong).forEach(song -> {
-            int index = ids.indexOf(song.id);
+            int index = ids.indexOf(song.getId());
             if (index != -1) {
                 map.put(index, song);
             }

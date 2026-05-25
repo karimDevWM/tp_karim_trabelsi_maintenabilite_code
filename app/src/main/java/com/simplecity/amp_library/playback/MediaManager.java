@@ -122,7 +122,7 @@ public class MediaManager {
         if (MusicServiceConnectionUtils.serviceBinder != null && MusicServiceConnectionUtils.serviceBinder.getService() != null) {
             Song song = MusicServiceConnectionUtils.serviceBinder.getService().getSong();
             if (song != null) {
-                return song.path;
+                return song.getPath();
             }
         }
         return null;

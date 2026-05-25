@@ -14,8 +14,6 @@ import kotlin.jvm.functions.Function1;
 
 public class Playlist implements Serializable {
 
-    private static final String TAG = "Playlist";
-
     public @interface Type {
         int PODCAST = 0;
         int RECENTLY_ADDED = 1;
@@ -26,18 +24,18 @@ public class Playlist implements Serializable {
     }
 
     @Type
-    public int type;
+    private int type;
 
-    public long id;
-    public String name;
-    public boolean canEdit = true;
-    public boolean canClear = false;
-    public boolean canDelete = true;
-    public boolean canRename = true;
-    public boolean canSort = true;
+    private final long id;
+    private String name;
+    private boolean canEdit = true;
+    private boolean canClear = false;
+    private boolean canDelete = true;
+    private boolean canRename = true;
+    private boolean canSort = true;
 
     // These are the Playlist rows that we will retrieve.
-    public static final String[] PROJECTION = new String[] {
+    protected static final String[] PROJECTION = new String[] {
             MediaStore.Audio.Playlists._ID,
             MediaStore.Audio.Playlists.NAME
     };
@@ -73,6 +71,66 @@ public class Playlist implements Serializable {
             canDelete = false;
             canRename = false;
         }
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isCanEdit() {
+        return canEdit;
+    }
+
+    public void setCanEdit(boolean canEdit) {
+        this.canEdit = canEdit;
+    }
+
+    public boolean isCanClear() {
+        return canClear;
+    }
+
+    public void setCanClear(boolean canClear) {
+        this.canClear = canClear;
+    }
+
+    public boolean isCanDelete() {
+        return canDelete;
+    }
+
+    public void setCanDelete(boolean canDelete) {
+        this.canDelete = canDelete;
+    }
+
+    public boolean isCanRename() {
+        return canRename;
+    }
+
+    public void setCanRename(boolean canRename) {
+        this.canRename = canRename;
+    }
+
+    public boolean isCanSort() {
+        return canSort;
+    }
+
+    public void setCanSort(boolean canSort) {
+        this.canSort = canSort;
     }
 
     public void clear(PlaylistManager playlistManager, FavoritesPlaylistManager favoritesPlaylistManager) {
@@ -125,9 +183,9 @@ public class Playlist implements Serializable {
 
     public static Song createSongFromPlaylistCursor(Cursor cursor) {
         Song song = new Song(cursor);
-        song.id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.AUDIO_ID));
-        song.playlistSongId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members._ID));
-        song.playlistSongPlayOrder = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.PLAY_ORDER));
+        song.setId(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.AUDIO_ID)));
+        song.setPlaylistSongId(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members._ID)));
+        song.setPlaylistSongPlayOrder(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.PLAY_ORDER)));
         return song;
     }
 }

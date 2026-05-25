@@ -800,9 +800,9 @@ public class MusicService extends MediaBrowserServiceCompat {
         if (song != null) {
             favoritesPlaylistManager.toggleFavorite(song, isFavorite -> {
                 if (isFavorite) {
-                    Toast.makeText(MusicService.this, getString(R.string.song_to_favourites, song.name), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MusicService.this, getString(R.string.song_to_favourites, song.getName()), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MusicService.this, getString(R.string.song_removed_from_favourites, song.name), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MusicService.this, getString(R.string.song_removed_from_favourites, song.getName()), Toast.LENGTH_SHORT).show();
                 }
                 notifyChange(InternalIntents.FAVORITE_CHANGED);
                 return Unit.INSTANCE;
@@ -1037,14 +1037,14 @@ public class MusicService extends MediaBrowserServiceCompat {
 
     private Bundle getExtras(@NonNull Song song) {
         Bundle extras = new Bundle();
-        extras.putLong("id", song.id);
-        extras.putString("artist", song.artistName);
-        extras.putString("album", song.albumName);
-        extras.putString("track", song.name);
+        extras.putLong("id", song.getId());
+        extras.putString("artist", song.getArtistName());
+        extras.putString("album", song.getAlbumName());
+        extras.putString("track", song.getName());
         extras.putInt("shuffleMode", getShuffleMode());
         extras.putInt("repeatMode", getRepeatMode());
         extras.putBoolean("playing", isPlaying());
-        extras.putLong("duration", song.duration);
+        extras.putLong("duration", song.getDuration());
         extras.putLong("position", getSeekPosition());
         extras.putLong("ListSize", queueManager.getCurrentPlaylist().size());
         return extras;
@@ -1052,15 +1052,15 @@ public class MusicService extends MediaBrowserServiceCompat {
 
     private Intent getTaskerIntent(@NonNull Song song) {
         Intent intent = new Intent(ExternalIntents.TASKER);
-        intent.putExtra("%MTRACK", isPlaying() ? song.name : "");
+        intent.putExtra("%MTRACK", isPlaying() ? song.getName() : "");
         return intent;
     }
 
     private Intent getPebbleIntent(@NonNull Song song) {
         Intent intent = new Intent(ExternalIntents.PEBBLE);
-        intent.putExtra("artist", song.artistName);
-        intent.putExtra("album", song.albumName);
-        intent.putExtra("track", song.name);
+        intent.putExtra("artist", song.getArtistName());
+        intent.putExtra("album", song.getAlbumName());
+        intent.putExtra("track", song.getName());
         return intent;
     }
 

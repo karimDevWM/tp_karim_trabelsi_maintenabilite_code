@@ -329,13 +329,13 @@ public class ShuttleApplication extends DaggerApplication {
             return Completable.complete();
         }
 
-        return songsRepository.getSongs(value -> value.year < 1)
+        return songsRepository.getSongs(value -> value.getYear() < 1)
                 .first(Collections.emptyList())
                 .flatMapObservable(Observable::fromIterable)
                 .concatMap(song -> Observable.just(song).delay(50, TimeUnit.MILLISECONDS))
                 .flatMap(song -> {
-                            if (!TextUtils.isEmpty(song.path)) {
-                                File file = new File(song.path);
+                            if (!TextUtils.isEmpty(song.getPath())) {
+                                File file = new File(song.getPath());
                                 // Don't bother checking files > 100mb, uses too much memory.
                                 if (file.exists() && file.length() < 100 * 1024 * 1024) {
                                     try {
@@ -345,12 +345,12 @@ public class ShuttleApplication extends DaggerApplication {
                                             String year = tag.getFirst(FieldKey.YEAR);
                                             int yearInt = StringUtils.parseInt(year);
                                             if (yearInt > 0) {
-                                                song.year = yearInt;
+                                                song.setYear(yearInt);
                                                 ContentValues contentValues = new ContentValues();
                                                 contentValues.put(MediaStore.Audio.Media.YEAR, yearInt);
 
                                                 return Observable.just(ContentProviderOperation
-                                                        .newUpdate(ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id))
+                                                        .newUpdate(ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.getId()))
                                                         .withValues(contentValues)
                                                         .build());
                                             }

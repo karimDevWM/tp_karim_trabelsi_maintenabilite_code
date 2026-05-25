@@ -32,9 +32,23 @@ public class CategoryItem {
     @Type
     public int type;
 
-    public int sortOrder;
+    private int sortOrder;
+    public int getSortOrder() {
+        return this.sortOrder;
+    }
+    public int setSortOrder(int sortOrder) {
+        this.sortOrder = sortOrder;
+        return this.sortOrder;
+    }
 
-    public boolean isChecked;
+    private boolean isChecked;
+    public boolean getIsChecked() {
+        return this.isChecked;
+    }
+    public boolean setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+        return this.isChecked;
+    }
 
     private CategoryItem(@Type int type, SharedPreferences sharedPreferences) {
         this.type = type;
@@ -78,11 +92,13 @@ public class CategoryItem {
                 return R.string.folders_title;
             case Type.PLAYLISTS:
                 return R.string.playlists_title;
+            default:
+                break;
         }
         return -1;
     }
 
-    public String getKey() {
+    public final String getKey() {
         switch (type) {
             case Type.GENRES:
                 return "genres";
@@ -98,11 +114,13 @@ public class CategoryItem {
                 return "folders";
             case Type.PLAYLISTS:
                 return "playlists";
+            default:
+                break;
         }
         return null;
     }
 
-    public boolean isEnabledByDefault() {
+    public final boolean isEnabledByDefault() {
         switch (type) {
             case Type.GENRES:
                 return true;
@@ -118,15 +136,17 @@ public class CategoryItem {
                 return false;
             case Type.PLAYLISTS:
                 return false;
+            default:
+                break;
         }
         return true;
     }
 
-    public String getSortKey() {
+    public final String getSortKey() {
         return getKey() + "_sort";
     }
 
-    public String getEnabledKey() {
+    public final String getEnabledKey() {
         return getKey() + "_enabled";
     }
 
@@ -146,6 +166,8 @@ public class CategoryItem {
                 return FolderFragment.newInstance(context.getString(getTitleResId()), true);
             case Type.PLAYLISTS:
                 return PlaylistListFragment.Companion.newInstance(context.getString(getTitleResId()));
+            default:
+                break;
         }
         return null;
     }

@@ -74,8 +74,8 @@ public class MusicNotificationHelper extends NotificationHelper {
                 .setContentIntent(contentIntent)
                 .setChannelId(NOTIFICATION_CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setContentTitle(song.name)
-                .setContentText(song.artistName + " - " + song.albumName)
+                .setContentTitle(song.getName())
+                .setContentText(song.getArtistName() + " - " + song.getAlbumName())
                 .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle()
                         .setShowActionsInCompactView(0, 1, 2)
                         .setMediaSession(mediaSessionToken))
@@ -140,7 +140,7 @@ public class MusicNotificationHelper extends NotificationHelper {
                 .priority(Priority.IMMEDIATE)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .override(600, 600)
-                .placeholder(PlaceholderProvider.getInstance(context).getPlaceHolderDrawable(song.albumName, false, settingsManager))
+                .placeholder(PlaceholderProvider.getInstance(context).getPlaceHolderDrawable(song.getAlbumName(), false, settingsManager))
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

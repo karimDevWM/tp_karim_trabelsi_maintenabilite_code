@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,22 +22,103 @@ public class Album implements
         Comparable<Album>,
         Sortable {
 
-    public long id;
-    public String name;
+    private long id;
+    public long getId() {
+        return this.id;
+    }
+    public long setId(long id) {
+        this.id = id;
+        return this.id;
+    }
 
-    public List<Artist> artists = new ArrayList<>();
-    public String albumArtistName;
+    private String name;
+    public String getName() {
+        return this.name;
+    }
+    public String setName(String name) {
+        this.name = name;
+        return this.name;
+    }
 
-    public int year;
-    public int numSongs;
-    public int numDiscs;
+    private List<Artist> artists = new ArrayList<>();
+    public List<Artist> getArtist() {
+        return this.artists;
+    }
+    public List<Artist> setArtist(List<Artist> artists) {
+        this.artists = artists;
+        return this.artists;
+    }
+    private String albumArtistName;
+    public String getAlbumArtistName() {
+        return this.albumArtistName;
+    }
+    public String setAlbumArtistName(String albumArtistName) {
+        this.albumArtistName = albumArtistName;
+        return this.albumArtistName;
+    }
 
-    public long lastPlayed;
-    public long dateAdded;
+    private int year;
+    public int getYear() {
+        return this.year;
+    }
+    public int setYear(int year) {
+        this.year = year;
+        return this.year;
+    }
 
-    public List<String> paths = new ArrayList<>();
+    private int numSongs;
+    public int getNumSongs() {
+        return this.numSongs;
+    }
+    public int setNumSongs(int numSongs) {
+        this.numSongs = numSongs;
+        return this.numSongs;
+    }
 
-    public int songPlayCount;
+    private int numDiscs;
+    public int getNumDiscs() {
+        return this.numDiscs;
+    }
+    public int setNumDiscs(int numDiscs) {
+        this.numDiscs = numDiscs;
+        return this.numDiscs;
+    }
+
+    private long lastPlayed;
+    public long getLastPlayed() {
+        return this.lastPlayed;
+    }
+    public long setLastPlayed(long lastPlayed) {
+        this.lastPlayed = lastPlayed;
+        return this.lastPlayed;
+    }
+
+    private long dateAdded;
+    public long getDateAdded() {
+        return this.dateAdded;
+    }
+    public long setLastPlayed(long dateAdded) {
+        this.dateAdded = dateAdded;
+        return this.dateAdded;
+    }
+
+    private List<String> paths = new ArrayList<>();
+    public List<String> getPaths() {
+        return this.paths;
+    }
+    public List<String> setPaths(List<String> paths) {
+        this.paths = paths;
+        return this.paths;
+    }
+
+    private int songPlayCount;
+    public int getSongPlayedCount() {
+        return this.songPlayCount;
+    }
+    public int setLastPlayed(int songPlayCount) {
+        this.songPlayCount = songPlayCount;
+        return this.songPlayCount;
+    }
 
     private String artworkKey;
 
@@ -59,6 +140,10 @@ public class Album implements
         //Populate the artwork key & sort key properties if null.
         setSortKey();
         setArtworkKey();
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public static class Builder {
@@ -212,8 +297,8 @@ public class Album implements
     public String getRemoteArtworkUrl() {
         try {
             return "https://artwork.shuttlemusicplayer.app/api/v1/artwork"
-                    + "?artist=" + URLEncoder.encode(albumArtistName, Charset.forName("UTF-8").name())
-                    + "&album=" + URLEncoder.encode(name, Charset.forName("UTF-8").name());
+                    + "?artist=" + URLEncoder.encode(albumArtistName, StandardCharsets.UTF_8.name())
+                    + "&album=" + URLEncoder.encode(name, StandardCharsets.UTF_8.name());
         } catch (UnsupportedEncodingException e) {
             return null;
         }

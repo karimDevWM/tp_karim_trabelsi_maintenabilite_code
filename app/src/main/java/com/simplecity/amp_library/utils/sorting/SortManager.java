@@ -100,11 +100,11 @@ public class SortManager {
     }
 
     public void setPlaylistDetailSongsSortOrder(Playlist playlist, @SongSort int sortOrder) {
-        setSortOrder(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS, playlist.id), sortOrder);
+        setSortOrder(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS, playlist.getId()), sortOrder);
     }
 
     public int getPlaylistDetailSongsSortOrder(Playlist playlist) {
-        return mPrefs.getInt(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS, playlist.id), SongSort.DETAIL_DEFAULT);
+        return mPrefs.getInt(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS, playlist.getId()), SongSort.DETAIL_DEFAULT);
     }
 
     public void setGenreDetailSongsSortOrder(@SongSort int sortOrder) {
@@ -126,11 +126,11 @@ public class SortManager {
     }
 
     public void setPlaylistDetailAlbumsSortOrder(Playlist playlist, @AlbumSort int sortOrder) {
-        setSortOrder(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS, playlist.id), sortOrder);
+        setSortOrder(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS, playlist.getId()), sortOrder);
     }
 
     public int getPlaylistDetailAlbumsSortOrder(Playlist playlist) {
-        return mPrefs.getInt(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS, playlist.id), AlbumSort.DEFAULT);
+        return mPrefs.getInt(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS, playlist.getId()), AlbumSort.DEFAULT);
     }
 
     public void setGenreDetailAlbumsSortOrder(@AlbumSort int sortOrder) {
@@ -160,11 +160,11 @@ public class SortManager {
     }
 
     public void setPlaylistDetailSongsAscending(Playlist playlist, boolean ascending) {
-        setAscending(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS_ASC, playlist.id), ascending);
+        setAscending(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS_ASC, playlist.getId()), ascending);
     }
 
     public boolean getPlaylistDetailSongsAscending(Playlist playlist) {
-        return mPrefs.getBoolean(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS_ASC, playlist.id), true);
+        return mPrefs.getBoolean(String.format("%s_%s", Key.PLAYLIST_DETAIL_SONGS_ASC, playlist.getId()), true);
     }
 
     public void setGenreDetailSongsAscending(boolean ascending) {
@@ -186,11 +186,11 @@ public class SortManager {
     }
 
     public void setPlaylistDetailAlbumsAscending(Playlist playlist, boolean ascending) {
-        setAscending(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS_ASC, playlist.id), ascending);
+        setAscending(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS_ASC, playlist.getId()), ascending);
     }
 
     public boolean getPlaylistDetailAlbumsAscending(Playlist playlist) {
-        return mPrefs.getBoolean(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS_ASC, playlist.id), true);
+        return mPrefs.getBoolean(String.format("%s_%s", Key.PLAYLIST_DETAIL_ALBUMS_ASC, playlist.getId()), true);
     }
 
     public void setGenreDetailAlbumsAscending(boolean ascending) {

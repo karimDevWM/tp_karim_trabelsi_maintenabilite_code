@@ -1,10 +1,9 @@
 package com.simplecity.amp_library.model;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.annimon.stream.Stream;
-import com.simplecity.amp_library.data.Repository;
 import com.simplecity.amp_library.utils.ComparisonUtils;
 import com.simplecity.amp_library.utils.StringUtils;
 import io.reactivex.Single;
@@ -13,7 +12,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,9 +23,23 @@ public class AlbumArtist implements
         ArtworkProvider,
         Sortable {
 
-    public String name;
+    private String name;
+    public String getName() {
+        return this.name;
+    }
+    public String setName(String name) {
+        this.name = name;
+        return this.name;
+    }
 
-    public List<Album> albums = new ArrayList<>();
+    private List<Album> albums = new ArrayList<>();
+    public List<Album> getAlbums() {
+        return albums;
+    }
+    public List<Album> setAlbums(List<Album> albums) {
+        this.albums = albums;
+        return albums;
+    }
 
     private String sortKey;
 
@@ -38,7 +51,7 @@ public class AlbumArtist implements
     public Single<List<Song>> getSongsSingle(Repository.SongsRepository songsRepository) {
         return songsRepository.getSongs(song -> Stream.of(albums)
                 .map(album -> album.id)
-                .anyMatch(albumId -> albumId == song.albumId))
+                .anyMatch(albumId -> albumId == song.getAlbumId()))
                 .first(Collections.emptyList());
     }
 
@@ -127,7 +140,7 @@ public class AlbumArtist implements
     @Override
     public String getRemoteArtworkUrl() {
         try {
-            return "https://artwork.shuttlemusicplayer.app/api/v1/artwork?artist=" + URLEncoder.encode(name, Charset.forName("UTF-8").name());
+            return "https://artwork.shuttlemusicplayer.app/api/v1/artwork?artist=" + URLEncoder.encode(name, StandardCharsets.UTF_8.name());
         } catch (UnsupportedEncodingException e) {
             return null;
         }

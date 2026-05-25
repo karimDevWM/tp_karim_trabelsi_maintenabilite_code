@@ -183,6 +183,7 @@
 
         <receiver 
             android:name="com.simplecity.amp_library.utils.MediaButtonIntentReceiver"
+            android:permission="android.permission.SEND_SMS"
             android:exported="true"
         >
             <intent-filter>

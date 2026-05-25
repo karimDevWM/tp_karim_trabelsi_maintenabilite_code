@@ -33,29 +33,31 @@ public class Song implements
 
     private static final String TAG = "Song";
 
-    public long id;
-    public String name;
-    public String artistName;
-    public long artistId;
-    public String albumName;
-    public long albumId;
-    public long duration;
-    public int year;
-    public int dateAdded;
-    public long playlistSongId;
-    public long playlistSongPlayOrder;
-    public int playCount;
-    public long lastPlayed;
-    public long startTime;
+    private static final String COLUMN_ALBUM_ARTIST = "album_artist";
+
+    private long id;
+    private String name;
+    private String artistName;
+    private long artistId;
+    private String albumName;
+    private long albumId;
+    private long duration;
+    private int year;
+    private int dateAdded;
+    private long playlistSongId;
+    private long playlistSongPlayOrder;
+    private int playCount;
+    private long lastPlayed;
+    private long startTime;
     private long elapsedTime = 0;
     private boolean isPaused;
-    public int track;
-    public int discNumber;
-    public boolean isPodcast;
-    public String path;
-    public long bookMark;
+    private int track;
+    private int discNumber;
+    private boolean isPodcast;
+    private String path;
+    private long bookMark;
 
-    public String albumArtistName;
+    private String albumArtistName;
 
     private TagInfo tagInfo;
 
@@ -85,7 +87,7 @@ public class Song implements
                 MediaStore.Audio.Media.DATE_ADDED,
                 MediaStore.Audio.Media.IS_PODCAST,
                 MediaStore.Audio.Media.BOOKMARK,
-                "album_artist"
+                COLUMN_ALBUM_ARTIST
         };
     }
 
@@ -113,24 +115,24 @@ public class Song implements
 
         albumName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
 
-        duration = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
+        setDuration(cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)));
 
-        year = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR));
+        setYear(cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.YEAR)));
 
-        track = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK));
+        setTrack(cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TRACK)));
 
         if (track >= 1000) {
-            discNumber = track / 1000;
-            track = track % 1000;
+            setDiscNumber(track / 1000);
+            setTrack(track % 1000);
         }
 
-        dateAdded = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_ADDED));
+        setDateAdded(cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATE_ADDED)));
 
-        path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
+        setPath(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)));
 
         albumArtistName = artistName;
-        if (cursor.getColumnIndex("album_artist") != -1) {
-            String albumArtist = cursor.getString(cursor.getColumnIndex("album_artist"));
+        if (cursor.getColumnIndex(COLUMN_ALBUM_ARTIST) != -1) {
+            String albumArtist = cursor.getString(cursor.getColumnIndex(COLUMN_ALBUM_ARTIST));
             if (albumArtist != null) {
                 albumArtistName = albumArtist;
             }
@@ -149,6 +151,166 @@ public class Song implements
 
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    public long getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(long artistId) {
+        this.artistId = artistId;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(long albumId) {
+        this.albumId = albumId;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(int dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public long getPlaylistSongId() {
+        return playlistSongId;
+    }
+
+    public void setPlaylistSongId(long playlistSongId) {
+        this.playlistSongId = playlistSongId;
+    }
+
+    public long getPlaylistSongPlayOrder() {
+        return playlistSongPlayOrder;
+    }
+
+    public void setPlaylistSongPlayOrder(long playlistSongPlayOrder) {
+        this.playlistSongPlayOrder = playlistSongPlayOrder;
+    }
+
+    public int getPlayCount() {
+        return playCount;
+    }
+
+    public void setPlayCount(int playCount) {
+        this.playCount = playCount;
+    }
+
+    public long getLastPlayed() {
+        return lastPlayed;
+    }
+
+    public void setLastPlayed(long lastPlayed) {
+        this.lastPlayed = lastPlayed;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public int getTrack() {
+        return track;
+    }
+
+    public void setTrack(int track) {
+        this.track = track;
+    }
+
+    public int getDiscNumber() {
+        return discNumber;
+    }
+
+    public void setDiscNumber(int discNumber) {
+        this.discNumber = discNumber;
+    }
+
+    public boolean isPodcast() {
+        return isPodcast;
+    }
+
+    public void setPodcast(boolean podcast) {
+        isPodcast = podcast;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public long getBookMark() {
+        return bookMark;
+    }
+
+    public void setBookMark(long bookMark) {
+        this.bookMark = bookMark;
+    }
+
+    public String getAlbumArtistName() {
+        return albumArtistName;
+    }
+
+    public void setAlbumArtistName(String albumArtistName) {
+        this.albumArtistName = albumArtistName;
+    }
+
     public Single<Genre> getGenre(Context context) {
         Query query = Genre.getQuery();
         query.uri = MediaStore.Audio.Genres.getContentUriForAudioId("external", (int) id);
@@ -156,8 +318,6 @@ public class Song implements
     }
 
     public int getPlayCount(Context context) {
-
-        int playCount = 0;
 
         Uri playCountUri = PlayCountTable.URI;
         Uri appendedUri = ContentUris.withAppendedId(playCountUri, id);

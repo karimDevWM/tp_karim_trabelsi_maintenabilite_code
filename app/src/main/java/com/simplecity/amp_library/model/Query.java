@@ -5,11 +5,51 @@ import java.util.Arrays;
 
 public class Query {
 
-    public Uri uri;
-    public String[] projection;
-    public String selection;
-    public String[] args;
-    public String sort;
+    private Uri uri;
+    public Uri getUri() {
+        return this.uri;
+    }
+    public Uri setUri(Uri uri) {
+        this.uri = uri;
+        return this.uri;
+    }
+
+    private String[] projection;
+    public String[] getProjection() {
+        return this.projection;
+    }
+    public String[] setProjection(String[] projection) {
+        this.projection = projection;
+        return this.projection;
+    }
+
+    private String selection;
+    public String getSelection() {
+        return this.selection;
+    }
+    public String setSelection(String selection) {
+        this.selection = selection;
+        return this.selection;
+    }
+    
+    private String[] args;
+    public String[] getArgs() {
+        return this.args;
+    }
+    public String[] setArgs(String[] args) {
+        this.args = args;
+        return this.args;
+    }
+    
+    private String sort;
+    public String getSort() {
+        return this.sort;
+    }
+    public String setSort(String sort) {
+        this.sort = sort;
+        return this.sort;
+    }
+
 
     Query(Builder builder) {
         uri = builder.uri;
@@ -27,6 +67,7 @@ public class Query {
         String sort;
 
         public Builder() {
+            // empty constructor
         }
 
         public Builder uri(Uri val) {

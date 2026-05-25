@@ -4,8 +4,15 @@ import java.io.Serializable;
 
 public class Header implements Serializable {
 
-    public String title;
-
+    private String title;
+    public String getTitle() {
+        return this.title;
+    }
+    public String setName(String title) {
+        this.title = title;
+        return this.title;
+    }
+    
     public Header(String title) {
         this.title = title;
     }

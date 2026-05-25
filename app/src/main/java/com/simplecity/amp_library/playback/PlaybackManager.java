@@ -325,13 +325,13 @@ public class PlaybackManager implements Playback.Callbacks {
 
         long finalId = id;
         if (finalId != -1 && (path.startsWith(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI.toString()) || path.startsWith(MediaStore.Files.getContentUri("external").toString()))) {
-            predicate = song -> song.id == finalId;
+            predicate = song -> song.getId() == finalId;
         } else {
             if (uri != null && path.startsWith("content://")) {
                 path = uri.getPath();
             }
             String finalPath = path;
-            predicate = song -> song.path.contains(finalPath);
+            predicate = song -> song.getPath().contains(finalPath);
         }
 
         disposables.add(songsRepository.getSongs(predicate)
@@ -360,7 +360,7 @@ public class PlaybackManager implements Playback.Callbacks {
                 && !queueManager.getCurrentPlaylist().isEmpty()
                 && queueManager.nextPlayPos < queueManager.getCurrentPlaylist().size()) {
             final Song nextSong = queueManager.getCurrentPlaylist().get(queueManager.nextPlayPos).getSong();
-            playback.setNextDataSource(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + nextSong.id);
+            playback.setNextDataSource(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + nextSong.getId());
         } else {
             playback.setNextDataSource(null);
         }
@@ -544,21 +544,21 @@ public class PlaybackManager implements Playback.Callbacks {
 
     private void saveBookmarkIfNeeded() {
         Song currentSong = queueManager.getCurrentSong();
-        if (currentSong != null && currentSong.isPodcast) {
+        if (currentSong != null && currentSong.isPodcast()) {
             long pos = getSeekPosition();
-            long duration = queueManager.getCurrentSong().duration;
+            long duration = queueManager.getCurrentSong().getDuration();
             if (pos < 5000 || (pos + 5000) > duration) {
                 // If we're near the start or end, clear the bookmark
                 pos = 0;
             }
 
-            currentSong.bookMark = pos;
+            currentSong.setBookMark(pos);
 
             try {
                 // Write 'pos' to the bookmark field
                 ContentValues values = new ContentValues();
                 values.put(MediaStore.Audio.Media.BOOKMARK, pos);
-                Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, queueManager.getCurrentSong().id);
+                Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, queueManager.getCurrentSong().getId());
                 if (uri != null) {
                     context.getContentResolver().update(uri, values, null, null);
                 } else {

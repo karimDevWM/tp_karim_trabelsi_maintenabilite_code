@@ -6,12 +6,17 @@ import java.io.File;
 
 public class ArtworkModel {
 
-    private static final String TAG = "ArtworkModel";
-
     @ArtworkProvider.Type
     public int type;
 
-    public File file;
+    private File file;
+    public File getFile() {
+        return this.file;
+    }
+    public File setFile(File file) {
+        this.file = file;
+        return this.file;
+    }
 
     public ArtworkModel(@ArtworkProvider.Type int type, File file) {
         this.type = type;
@@ -28,6 +33,8 @@ public class ArtworkModel {
                 return "Folder";
             case ArtworkProvider.Type.REMOTE:
                 return context.getString(R.string.artwork_type_internet);
+            default:
+                break;
         }
         return null;
     }

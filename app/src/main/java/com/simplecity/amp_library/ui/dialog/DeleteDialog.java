@@ -168,7 +168,7 @@ public class DeleteDialog extends DialogFragment implements SafManager.SafDialog
                 names = Stream.of(albums).map(album -> album.name).toList();
                 break;
             case Type.SONGS:
-                names = Stream.of(songs).map(song -> song.name).toList();
+                names = Stream.of(songs).map(song -> song.getName()).toList();
                 break;
         }
 
@@ -241,7 +241,7 @@ public class DeleteDialog extends DialogFragment implements SafManager.SafDialog
         disposables.add(getSongs().map(songs -> {
             // Keep track of the songs we want to delete, for later.
             Stream.of(songs).forEach(song -> {
-                if (SafManager.getInstance(getContext(), settingsManager).requiresPermission(new File(song.path))) {
+                if (SafManager.getInstance(getContext(), settingsManager).requiresPermission(new File(song.getPath()))) {
                     songsForSafDeletion.add(song);
                 } else {
                     songsForNormalDeletion.add(song);
@@ -253,7 +253,7 @@ public class DeleteDialog extends DialogFragment implements SafManager.SafDialog
                 // We're gonna need SAF access to delete some songs.
                 // We may be able to build a list of document files if the user has been here before..
                 List<DocumentFile> documentFiles = SafManager.getInstance(getContext(), settingsManager).getWriteableDocumentFiles(Stream.of(songsForSafDeletion)
-                        .map(song -> new File(song.path))
+                        .map(song -> new File(song.getPath()))
                         .toList());
 
                 if (documentFiles.size() == songsForSafDeletion.size()) {
@@ -330,7 +330,7 @@ public class DeleteDialog extends DialogFragment implements SafManager.SafDialog
         // Remove songs from play count table
         ArrayList<ContentProviderOperation> operations = Stream.of(deletedSongs).map(song -> ContentProviderOperation
                 .newDelete(PlayCountTable.URI)
-                .withSelection(PlayCountTable.COLUMN_ID + "=" + song.id, null)
+                .withSelection(PlayCountTable.COLUMN_ID + "=" + song.getId(), null)
                 .build())
                 .collect(Collectors.toCollection(ArrayList::new));
         try {
@@ -340,7 +340,7 @@ public class DeleteDialog extends DialogFragment implements SafManager.SafDialog
         }
 
         CustomMediaScanner.scanFiles(getContext(), Stream.of(deletedSongs)
-                .map(song -> song.path)
+                .map(song -> song.getPath())
                 .toList(), null);
     }
 
@@ -349,7 +349,7 @@ public class DeleteDialog extends DialogFragment implements SafManager.SafDialog
     public void onResult(@Nullable Uri treeUri) {
         if (treeUri != null) {
             disposables.add(Completable.fromAction(() -> documentFilesForDeletion = SafManager.getInstance(getContext(), settingsManager).getWriteableDocumentFiles(Stream.of(songsForSafDeletion)
-                    .map(song -> new File(song.path))
+                    .map(song -> new File(song.getPath()))
                     .toList()))
                     .andThen(deleteSongs())
                     .subscribeOn(Schedulers.io())

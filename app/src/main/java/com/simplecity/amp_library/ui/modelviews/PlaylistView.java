@@ -52,8 +52,8 @@ public class PlaylistView extends BaseViewModel<PlaylistView.ViewHolder> {
     public void bindView(ViewHolder holder) {
         super.bindView(holder);
 
-        holder.lineOne.setText(playlist.name);
-        holder.overflowButton.setContentDescription(holder.itemView.getResources().getString(btn_options, playlist.name));
+        holder.lineOne.setText(playlist.getName());
+        holder.overflowButton.setContentDescription(holder.itemView.getResources().getString(btn_options, playlist.getName()));
     }
 
     void onPlaylistClicked(int position) {

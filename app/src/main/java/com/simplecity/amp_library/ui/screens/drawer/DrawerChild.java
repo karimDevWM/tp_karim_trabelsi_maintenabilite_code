@@ -37,7 +37,7 @@ public class DrawerChild {
     public void bindView(ChildHolder holder) {
         holder.bind(this);
 
-        holder.lineOne.setText(playlist.name);
+        holder.lineOne.setText(playlist.getName());
     }
 
     void onClick() {
