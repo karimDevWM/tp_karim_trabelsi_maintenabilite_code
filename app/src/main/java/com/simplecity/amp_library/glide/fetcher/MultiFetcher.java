@@ -13,15 +13,13 @@ import java.io.InputStream;
 
 public class MultiFetcher implements DataFetcher<InputStream> {
 
-    private static final String TAG = "MultiFetcher";
-
-    private Context applicationContext;
+    private final Context applicationContext;
 
     private DataFetcher<InputStream> dataFetcher;
 
-    private ArtworkProvider artworkProvider;
+    private final  ArtworkProvider artworkProvider;
 
-    private SettingsManager settingsManager;
+    private final SettingsManager settingsManager;
 
     private boolean allowOfflineDownload = false;
 
@@ -67,7 +65,9 @@ public class MultiFetcher implements DataFetcher<InputStream> {
                     dataFetcher = new RemoteFetcher(artworkProvider);
                     break;
             }
-            inputStream = loadData(dataFetcher, priority);
+            if (dataFetcher != null) {
+                inputStream = loadData(dataFetcher, priority);
+            }
         }
 
         //No user selected artwork. Check local then remote sources, according to user's preferences.
@@ -104,20 +104,17 @@ public class MultiFetcher implements DataFetcher<InputStream> {
             }
         }
 
-        if (inputStream == null) {
-            if (allowOfflineDownload
+        if (inputStream == null && (allowOfflineDownload
                     || (settingsManager.canDownloadArtworkAutomatically()
-                    && ShuttleUtils.isOnline(applicationContext, true))) {
+                    && ShuttleUtils.isOnline(applicationContext, true)))) {
 
-                //Last FM
-                dataFetcher = new RemoteFetcher(artworkProvider);
-                inputStream = loadData(dataFetcher, priority);
-            }
+            //Last FM
+            dataFetcher = new RemoteFetcher(artworkProvider);
+            inputStream = loadData(dataFetcher, priority);
         }
         return inputStream;
     }
 
-    @Override
     public void cleanup() {
         if (dataFetcher != null) {
             dataFetcher.cleanup();

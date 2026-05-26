@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Query {
 
-    private Uri uri;
+    public Uri uri;
     public Uri getUri() {
         return this.uri;
     }
@@ -14,7 +14,7 @@ public class Query {
         return this.uri;
     }
 
-    private String[] projection;
+    public String[] projection;
     public String[] getProjection() {
         return this.projection;
     }
@@ -23,7 +23,7 @@ public class Query {
         return this.projection;
     }
 
-    private String selection;
+    public String selection;
     public String getSelection() {
         return this.selection;
     }
@@ -32,7 +32,7 @@ public class Query {
         return this.selection;
     }
     
-    private String[] args;
+    public String[] args;
     public String[] getArgs() {
         return this.args;
     }
@@ -41,7 +41,7 @@ public class Query {
         return this.args;
     }
     
-    private String sort;
+    public String sort;
     public String getSort() {
         return this.sort;
     }

@@ -28,14 +28,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Equalizer {
 
-    private Context context;
+    private final Context context;
 
-    private SettingsManager settingsManager;
+    private final SettingsManager settingsManager;
 
     private static final String ACTION_OPEN_EQUALIZER_SESSION = "com.simplecity.amp_library.audiofx.OPEN_SESSION";
     private static final String ACTION_CLOSE_EQUALIZER_SESSION = "com.simplecity.amp_library.audiofx.CLOSE_SESSION";
 
-    private SharedPreferences mPrefs;
+    private final SharedPreferences mPrefs;
 
     public Equalizer(Context context, SettingsManager settingsManager) {
 
@@ -88,13 +88,11 @@ public class Equalizer {
         /**
          * Session-specific bassboost
          */
-        private BassBoost bassBoost;
+        private final BassBoost bassBoost;
         /**
          * Session-specific virtualizer
          */
-        private Virtualizer virtualizer;
-
-        //        private final PresetReverb mPresetReverb;
+        private final Virtualizer virtualizer;
 
         private short mEqNumPresets = -1;
         private short mEqNumBands = -1;
@@ -181,26 +179,10 @@ public class Equalizer {
             }
         }
 
-        //        public void enableReverb(boolean enable) {
-        //            if (enable != mPresetReverb.getEnabled()) {
-        //                if (!enable) {
-        //                    mPresetReverb.setPreset((short) 0);
-        //                }
-        //                mPresetReverb.setEnabled(enable);
-        //            }
-        //        }
-
-        //        public void setReverbPreset(short preset) {
-        //            if (mPresetReverb.getEnabled() && mPresetReverb.getPreset() != preset) {
-        //                mPresetReverb.setPreset(preset);
-        //            }
-        //        }
-
         public void release() {
             equalizer.release();
             bassBoost.release();
             virtualizer.release();
-            //            mPresetReverb.release();
         }
     }
 
@@ -334,13 +316,9 @@ public class Equalizer {
         try {
             session.enableEqualizer(globalEnabled);
             final int customPresetPos = session.getNumEqualizerPresets();
-            final int preset = Integer.valueOf(mPrefs.getString("audiofx.eq.preset", String.valueOf(customPresetPos)));
+            final int preset = Integer.parseInt(mPrefs.getString("audiofx.eq.preset", String.valueOf(customPresetPos)));
             final int bands = session.getNumEqualizerBands();
 
-            /*
-             * Equalizer state is in a single string preference with all values
-             * separated by ;
-             */
             String[] levels;
 
             if (preset == customPresetPos) {

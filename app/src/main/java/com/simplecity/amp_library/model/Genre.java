@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Genre implements Serializable {
 
-    private long id;
+    public long id;
     public long getId() {
         return this.id;
     }
@@ -15,7 +15,7 @@ public class Genre implements Serializable {
         return this.id;
     }
 
-    private String name;
+    public String name;
     public String getName() {
         return this.name;
     }
@@ -24,7 +24,7 @@ public class Genre implements Serializable {
         return this.name;
     }
 
-    private int numSongs;
+    public int numSongs;
 
     public static String[] getProjection() {
         return new String[] {

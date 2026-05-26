@@ -37,7 +37,7 @@ open class SongsRepository @Inject constructor(
     private val blacklistRepository: Repository.BlacklistRepository,
     private val whitelistRepository: Repository.WhitelistRepository,
     private val settingsManager: SettingsManager
-) : SongsRepository {
+) : Repository.SongsRepository {
 
     private var songsSubscription: Disposable? = null
     private val songsRelay = BehaviorRelay.create<List<Song>>()

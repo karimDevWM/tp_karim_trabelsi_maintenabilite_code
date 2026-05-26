@@ -21,7 +21,7 @@ object Dependencies {
         const val dagger = "2.21"
         const val daggerAssistedInject = "0.3.2"
         const val expandableRecyclerView = "3.0.0-RC1"
-        const val billing = "1.2"
+        const val billing = "2.1.0"
     }
 
     // Kotlin
@@ -80,7 +80,7 @@ object Dependencies {
     object Plugins {
 
         object Versions {
-            const val androidGradlePlugin = "3.3.1"
+            const val androidGradlePlugin = "3.4.3"
             const val kotlin = "1.3.21"
             const val ktx = "1.0.0"
             const val dexcountGradlePlugin = "0.8.6"

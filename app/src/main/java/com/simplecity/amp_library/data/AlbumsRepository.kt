@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AlbumsRepository @Inject constructor(private val songsRepository: Repository.SongsRepository) : AlbumsRepository {
+class AlbumsRepository @Inject constructor(private val songsRepository: Repository.SongsRepository) : Repository.AlbumsRepository {
 
     private var albumsSubscription: Disposable? = null
     private val albumsRelay = BehaviorRelay.create<List<Album>>()

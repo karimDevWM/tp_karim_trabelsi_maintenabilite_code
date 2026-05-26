@@ -22,7 +22,7 @@ public class Album implements
         Comparable<Album>,
         Sortable {
 
-    private long id;
+    public long id;
     public long getId() {
         return this.id;
     }
@@ -31,7 +31,7 @@ public class Album implements
         return this.id;
     }
 
-    private String name;
+    public String name;
     public String getName() {
         return this.name;
     }
@@ -40,7 +40,7 @@ public class Album implements
         return this.name;
     }
 
-    private List<Artist> artists = new ArrayList<>();
+    public List<Artist> artists = new ArrayList<>();
     public List<Artist> getArtist() {
         return this.artists;
     }
@@ -48,7 +48,7 @@ public class Album implements
         this.artists = artists;
         return this.artists;
     }
-    private String albumArtistName;
+    public String albumArtistName;
     public String getAlbumArtistName() {
         return this.albumArtistName;
     }
@@ -57,7 +57,7 @@ public class Album implements
         return this.albumArtistName;
     }
 
-    private int year;
+    public int year;
     public int getYear() {
         return this.year;
     }
@@ -66,7 +66,7 @@ public class Album implements
         return this.year;
     }
 
-    private int numSongs;
+    public int numSongs;
     public int getNumSongs() {
         return this.numSongs;
     }
@@ -75,7 +75,7 @@ public class Album implements
         return this.numSongs;
     }
 
-    private int numDiscs;
+    public int numDiscs;
     public int getNumDiscs() {
         return this.numDiscs;
     }
@@ -84,7 +84,7 @@ public class Album implements
         return this.numDiscs;
     }
 
-    private long lastPlayed;
+    public long lastPlayed;
     public long getLastPlayed() {
         return this.lastPlayed;
     }
@@ -93,16 +93,16 @@ public class Album implements
         return this.lastPlayed;
     }
 
-    private long dateAdded;
+    public long dateAdded;
     public long getDateAdded() {
         return this.dateAdded;
     }
-    public long setLastPlayed(long dateAdded) {
+    public long setDateAdded(long dateAdded) {
         this.dateAdded = dateAdded;
         return this.dateAdded;
     }
 
-    private List<String> paths = new ArrayList<>();
+    public List<String> paths = new ArrayList<>();
     public List<String> getPaths() {
         return this.paths;
     }
@@ -111,11 +111,11 @@ public class Album implements
         return this.paths;
     }
 
-    private int songPlayCount;
+    public int songPlayCount;
     public int getSongPlayedCount() {
         return this.songPlayCount;
     }
-    public int setLastPlayed(int songPlayCount) {
+    public int setSongPlayCount(int songPlayCount) {
         this.songPlayCount = songPlayCount;
         return this.songPlayCount;
     }
@@ -142,23 +142,20 @@ public class Album implements
         setArtworkKey();
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
 
     public static class Builder {
 
-        private long id;
-        private String name;
-        private List<Artist> artists = new ArrayList<>();
-        private String albumArtistName;
-        private int numSongs;
-        private int numDiscs;
-        private int year;
-        private long lastPlayed;
-        private long dateAdded;
-        private List<String> paths = new ArrayList<>();
-        private int songPlayCount;
+        public long id;
+        public String name;
+        public List<Artist> artists = new ArrayList<>();
+        public String albumArtistName;
+        public int numSongs;
+        public int numDiscs;
+        public int year;
+        public long lastPlayed;
+        public long dateAdded;
+        public List<String> paths = new ArrayList<>();
+        public int songPlayCount;
 
         public Builder id(long id) {
             this.id = id;

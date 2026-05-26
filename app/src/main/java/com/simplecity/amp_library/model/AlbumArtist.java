@@ -1,11 +1,12 @@
 package com.simplecity.amp_library.model;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.annimon.stream.Stream;
 import com.simplecity.amp_library.utils.ComparisonUtils;
 import com.simplecity.amp_library.utils.StringUtils;
+import com.simplecity.amp_library.data.Repository;
 import io.reactivex.Single;
 import java.io.File;
 import java.io.InputStream;
@@ -23,7 +24,7 @@ public class AlbumArtist implements
         ArtworkProvider,
         Sortable {
 
-    private String name;
+    public String name;
     public String getName() {
         return this.name;
     }
@@ -32,7 +33,7 @@ public class AlbumArtist implements
         return this.name;
     }
 
-    private List<Album> albums = new ArrayList<>();
+    public List<Album> albums = new ArrayList<>();
     public List<Album> getAlbums() {
         return albums;
     }
@@ -75,8 +76,8 @@ public class AlbumArtist implements
     }
 
     public static class Builder {
-        private String name;
-        private List<Album> albums = new ArrayList<>();
+        public String name;
+        public List<Album> albums = new ArrayList<>();
 
         public Builder name(String name) {
             this.name = name;

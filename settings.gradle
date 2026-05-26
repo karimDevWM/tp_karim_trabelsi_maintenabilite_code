@@ -1,6 +1,7 @@
+rootProject.name = 'tp_karim_trabelsi_maintenabilite_code'
+
 include ':app',
         'libraries:glidepalette',
-        'libraries:ccl',
         'libraries:navigation',
         'libraries:recycler-adapter',
         'libraries:multisheetview',

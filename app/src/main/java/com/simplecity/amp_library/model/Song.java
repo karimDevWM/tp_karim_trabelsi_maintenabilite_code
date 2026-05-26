@@ -35,29 +35,29 @@ public class Song implements
 
     private static final String COLUMN_ALBUM_ARTIST = "album_artist";
 
-    private long id;
-    private String name;
-    private String artistName;
-    private long artistId;
-    private String albumName;
-    private long albumId;
-    private long duration;
-    private int year;
-    private int dateAdded;
-    private long playlistSongId;
-    private long playlistSongPlayOrder;
-    private int playCount;
-    private long lastPlayed;
-    private long startTime;
-    private long elapsedTime = 0;
-    private boolean isPaused;
-    private int track;
-    private int discNumber;
-    private boolean isPodcast;
-    private String path;
-    private long bookMark;
+    public long id;
+    public String name;
+    public String artistName;
+    public long artistId;
+    public String albumName;
+    public long albumId;
+    public long duration;
+    public int year;
+    public int dateAdded;
+    public long playlistSongId;
+    public long playlistSongPlayOrder;
+    public int playCount;
+    public long lastPlayed;
+    public long startTime;
+    public long elapsedTime = 0;
+    public boolean isPaused;
+    public int track;
+    public int discNumber;
+    public boolean isPodcast;
+    public String path;
+    public long bookMark;
 
-    private String albumArtistName;
+    public String albumArtistName;
 
     private TagInfo tagInfo;
 
@@ -441,11 +441,9 @@ public class Song implements
     }
 
     public String getFileSizeLabel() {
-        if (fileSizeLabel == null) {
-            if (!TextUtils.isEmpty(path)) {
-                File file = new File(path);
-                fileSizeLabel = FileHelper.getHumanReadableSize(file.length());
-            }
+        if (fileSizeLabel == null && !TextUtils.isEmpty(path)) {
+            File file = new File(path);
+            fileSizeLabel = FileHelper.getHumanReadableSize(file.length());
         }
         return fileSizeLabel;
     }

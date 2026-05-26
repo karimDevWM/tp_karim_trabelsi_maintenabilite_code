@@ -3,11 +3,10 @@ import org.jetbrains.annotations.Nullable
 
 buildscript {
     repositories {
-        jcenter()
+        google()
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-        maven { url "https://maven.google.com" }
         mavenCentral()
     }
     dependencies {
@@ -30,9 +29,10 @@ apply plugin: Dependencies.BuildPlugins.dexCount
 apply plugin: Dependencies.BuildPlugins.fabric
 
 repositories {
+    google()
     maven { url 'https://maven.fabric.io/public' }
     maven { url "https://jitpack.io" }
-    maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     mavenCentral()
 }
 

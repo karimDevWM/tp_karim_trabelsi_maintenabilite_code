@@ -71,3 +71,4 @@ gradle-app.setting
 /deployment_keys.json
 /secrets.tar
 docker-compose.yml
+MAINTENANCE.md

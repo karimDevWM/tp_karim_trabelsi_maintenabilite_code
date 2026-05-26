@@ -7,25 +7,9 @@ import com.simplecity.amp_library.utils.StringUtils;
 
 public class FileObject extends BaseFileObject {
 
-    private String extension;
-    public String getExtension() {
-        return this.extension;
-    }
-    public String setExtension(String extension) {
-        this.extension = extension;
-        return this.extension;
-    }
-
-    private TagInfo tagInfo;
-    public TagInfo getTagInfo() {
-        return this.tagInfo;
-    }
-    public TagInfo setTagInfo(TagInfo tagInfo) {
-        this.tagInfo = tagInfo;
-        return this.tagInfo;
-    }
-
-    private long duration = 0;
+    public String extension;
+    public TagInfo tagInfo;
+    public long duration = 0;
 
     public FileObject() {
         this.fileType = FileType.FILE;

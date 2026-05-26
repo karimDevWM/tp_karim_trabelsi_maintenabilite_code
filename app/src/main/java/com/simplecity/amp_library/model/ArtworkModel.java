@@ -9,14 +9,7 @@ public class ArtworkModel {
     @ArtworkProvider.Type
     public int type;
 
-    private File file;
-    public File getFile() {
-        return this.file;
-    }
-    public File setFile(File file) {
-        this.file = file;
-        return this.file;
-    }
+    public File file;
 
     public ArtworkModel(@ArtworkProvider.Type int type, File file) {
         this.type = type;

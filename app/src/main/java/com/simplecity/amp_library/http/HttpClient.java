@@ -10,25 +10,23 @@ public class HttpClient {
     public static final String TAG = "HttpClient";
 
     private static final String URL_LAST_FM = "https://ws.audioscrobbler.com/2.0/";
-    private final OkHttpClient okHttpClient;
-    private static HttpClient sInstance;
-
+    
+    private static final OkHttpClient okHttpClient;
+    
     public static final LastFmService lastFmService;
 
     public static final String TAG_ARTWORK = "artwork";
 
+    private static HttpClient sInstance;
+
     static {
         okHttpClient = new OkHttpClient.Builder().build();
         Retrofit lastFmRestAdapter = new Retrofit.Builder()
-            .baseUrl(URL_LAST_FM)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-            lastFmService = lastFmRestAdapter.create(LastFmService.class);
-    }
-
-    public LastFmService getLastFmService() {
-        return lastFmService;
+                .baseUrl(URL_LAST_FM)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        lastFmService = lastFmRestAdapter.create(LastFmService.class);
     }
 
     public static synchronized HttpClient getInstance() {
@@ -39,16 +37,10 @@ public class HttpClient {
     }
 
     private HttpClient() {
+        // empty constructor
+    }
 
-        okHttpClient = new OkHttpClient.Builder()
-                //                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.0.3", 8888)))
-                .build();
-
-        Retrofit lastFmRestAdapter = new Retrofit.Builder()
-                .baseUrl(URL_LAST_FM)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        lastFmService = lastFmRestAdapter.create(LastFmService.class);
+    public LastFmService getLastFmService() {
+        return lastFmService;
     }
 }

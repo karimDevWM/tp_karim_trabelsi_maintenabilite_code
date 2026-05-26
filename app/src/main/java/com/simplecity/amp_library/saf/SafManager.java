@@ -255,7 +255,7 @@ public class SafManager {
         }
 
         public SafDialog() {
-
+            throw new UnsupportedOperationException("notImplemented() cannot be performed because ...");
         }
 
         public static <T extends AppCompatActivity & SafResultListener> void show(T activity) {

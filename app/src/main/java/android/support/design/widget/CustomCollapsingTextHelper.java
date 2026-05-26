@@ -96,8 +96,8 @@ public final class CustomCollapsingTextHelper {
     private Interpolator mPositionInterpolator;
     private Interpolator mTextSizeInterpolator;
 
-    private float mCollapsedShadowRadius, 
-    private float mCollapsedShadowDx, 
+    private float mCollapsedShadowRadius;
+    private float mCollapsedShadowDx;
     private float mCollapsedShadowDy;
     private int mCollapsedShadowColor;
 

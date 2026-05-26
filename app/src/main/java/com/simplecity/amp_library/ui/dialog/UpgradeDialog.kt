@@ -14,6 +14,7 @@ import com.simplecity.amp_library.utils.ShuttleUtils
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
+
 class UpgradeDialog : DialogFragment() {
 
     @Inject lateinit var billingManager: BillingManager

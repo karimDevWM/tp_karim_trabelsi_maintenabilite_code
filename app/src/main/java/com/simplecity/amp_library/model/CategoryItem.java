@@ -32,23 +32,8 @@ public class CategoryItem {
     @Type
     public int type;
 
-    private int sortOrder;
-    public int getSortOrder() {
-        return this.sortOrder;
-    }
-    public int setSortOrder(int sortOrder) {
-        this.sortOrder = sortOrder;
-        return this.sortOrder;
-    }
-
-    private boolean isChecked;
-    public boolean getIsChecked() {
-        return this.isChecked;
-    }
-    public boolean setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
-        return this.isChecked;
-    }
+    public int sortOrder;
+    public boolean isChecked;
 
     private CategoryItem(@Type int type, SharedPreferences sharedPreferences) {
         this.type = type;

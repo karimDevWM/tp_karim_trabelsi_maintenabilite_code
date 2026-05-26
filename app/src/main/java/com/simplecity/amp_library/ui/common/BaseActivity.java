@@ -1,5 +1,6 @@
 package com.simplecity.amp_library.ui.common;
 
+import com.simplecity.amp_library.billing.Purchase;
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -17,7 +18,6 @@ import android.view.Window;
 import android.widget.Toast;
 import com.afollestad.aesthetic.AestheticActivity;
 import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.Purchase;
 import com.greysonparrelli.permiso.Permiso;
 import com.simplecity.amp_library.R;
 import com.simplecity.amp_library.ShuttleApplication;
@@ -97,7 +97,7 @@ public abstract class BaseActivity extends AestheticActivity implements
 
         Permiso.getInstance().setActivity(this);
 
-        if (billingManager.getBillingClientResponseCode() == BillingClient.BillingResponse.OK) {
+        if (billingManager.getBillingClientResponseCode() == BillingClient.BillingResponseCode.OK) {
             billingManager.queryPurchases();
         }
     }

@@ -52,9 +52,9 @@ public class EqualizerFragment extends BaseFragment implements
 
     private static final String AUDIOFX_EQ_PRESET = "audiofx.eq.preset";
 
-    private static final String = "audiofx.eq.bandlevels";
+    private static final String AUDIOFX_EQ_BANDLEVELS = "audiofx.eq.bandlevels";
 
-    private static final String = "audiofx.eq.bandlevels.custom";
+    private static final String AUDIOFX_EQ_BANDLEVELS_CUSTOM = "audiofx.eq.bandlevels.custom";
 
 
     SharedPreferences prefs;

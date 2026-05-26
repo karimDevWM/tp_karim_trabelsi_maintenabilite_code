@@ -4,41 +4,10 @@ import java.io.Serializable;
 
 public class Artist implements Serializable {
 
-    private long id;
-    public long getId() {
-        return this.id;
-    }
-    public long setId(long id) {
-        this.id = id;
-        return this.id;
-    }
-    
-    private String name;
-    public String getName() {
-        return this.name;
-    }
-    public String setName(String name) {
-        this.name = name;
-        return this.name;
-    }
-
-    private int numAlbums;
-    public int getNumAlbums() {
-        return this.numAlbums;
-    }
-    public int setNumAlbums(int numAlbums) {
-        this.numAlbums = numAlbums;
-        return this.numAlbums;
-    }
-
-    private int numSongs;
-    public int getNumSongs() {
-        return this.numSongs;
-    }
-    public int setNumSongs(int numSongs) {
-        this.numSongs = numSongs;
-        return this.numSongs;
-    }
+    public long id;
+    public String name;
+    public int numAlbums;
+    public int numSongs;
 
     public Artist(long id, String name) {
         this.id = id;
@@ -65,5 +34,9 @@ public class Artist implements Serializable {
         result = 31 * result + numAlbums;
         result = 31 * result + numSongs;
         return result;
+    }
+
+    public long getId() {
+        return id;
     }
 }
