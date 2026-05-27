@@ -64,6 +64,8 @@ public class MultiFetcher implements DataFetcher<InputStream> {
                 case ArtworkProvider.Type.REMOTE:
                     dataFetcher = new RemoteFetcher(artworkProvider);
                     break;
+                default:
+                    break;
             }
             if (dataFetcher != null) {
                 inputStream = loadData(dataFetcher, priority);

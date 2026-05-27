@@ -25,6 +25,8 @@ public class HttpServer {
 
     private boolean isStarted = false;
 
+    private final responseType = "text/html";
+
     public static HttpServer getInstance() {
         if (sHttpServer == null) {
             sHttpServer = new HttpServer();
@@ -83,7 +85,7 @@ public class HttpServer {
 
             if (audioFileToServe == null) {
                 Log.e(TAG, "Audio file to serve null");
-                return newFixedLengthResponse(Response.Status.NOT_FOUND, "text/html", "File not found");
+                return newFixedLengthResponse(Response.Status.NOT_FOUND, responseType, "File not found");
             }
 
             String uri = session.getUri();
@@ -133,7 +135,7 @@ public class HttpServer {
                         response.addHeader("Content-Type", getMimeType(audioFileToServe));
                         return response;
                     } else {
-                        return newFixedLengthResponse(Response.Status.RANGE_NOT_SATISFIABLE, "text/html", range);
+                        return newFixedLengthResponse(Response.Status.RANGE_NOT_SATISFIABLE, responseType, range);
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "Error serving audio: " + e.getMessage());
@@ -141,7 +143,7 @@ public class HttpServer {
                 }
             } else if (uri.contains("image")) {
                 if (imageBytesToServe == null) {
-                    return newFixedLengthResponse(Response.Status.NOT_FOUND, "text/html", "Image bytes null");
+                    return newFixedLengthResponse(Response.Status.NOT_FOUND, responseType, "Image bytes null");
                 }
                 cleanupImageStream();
                 imageInputStream = new ByteArrayInputStream(imageBytesToServe);
@@ -149,7 +151,7 @@ public class HttpServer {
                 return newFixedLengthResponse(Response.Status.OK, "image/png", imageInputStream, imageBytesToServe.length);
             }
             Log.e(TAG, "Returning NOT_FOUND response");
-            return newFixedLengthResponse(Response.Status.NOT_FOUND, "text/html", "File not found");
+            return newFixedLengthResponse(Response.Status.NOT_FOUND, responseType, "File not found");
         }
     }
 
@@ -175,8 +177,8 @@ public class HttpServer {
 
     private final Map<String, String> MIME_TYPES = new HashMap<String, String>() {{
         put("css", "text/css");
-        put("htm", "text/html");
-        put("html", "text/html");
+        put("htm", responseType);
+        put("html", responseType);
         put("xml", "text/xml");
         put("java", "text/x-java-source, text/java");
         put("md", "text/plain");
